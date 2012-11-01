@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'json'
 require 'httparty'
-require 'active_support/core_ext/enumerable.rb'
 
 get '/' do
   content_type :json
