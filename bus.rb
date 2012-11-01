@@ -9,7 +9,8 @@ end
 
 def predictions(index)
   prediction_objects = [xml["body"]["predictions"][index]["direction"]].flatten.collect { |h| h["prediction"] }.flatten
-  prediction_objects.collect {|p| p["minutes"]}
+  minutes = prediction_objects.collect {|p| p["minutes"]}
+  minutes[0..2].join(',')
 end
 
 def xml
