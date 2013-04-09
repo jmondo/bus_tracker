@@ -14,5 +14,11 @@ def predictions(index)
 end
 
 def xml
-  @xml ||= HTTParty.get('http://webservices.nextbus.com/service/publicXMLFeed?command=predictionsForMultiStops&a=sf-muni&stops=22%7c4622&stops=22%7c4621&stops=21%7c4994&stops=21%7c7423')
+  with_cache_variable(:@xml) do
+    HTTParty.get('http://webservices.nextbus.com/service/publicXMLFeed?command=predictionsForMultiStops&a=sf-muni&stops=22%7c4622&stops=22%7c4621&stops=21%7c4994&stops=21%7c7423')
+  end
+end
+
+def with_cache_variable(var_sym)
+  instance_variable_get(var_sym) || instance_variable_set(var_sym, yield)
 end
